@@ -125,6 +125,10 @@
     .tag { font-family: var(--font-mono); font-size: 11px; color: var(--green); background: var(--green-tint); border-radius: 999px; padding: 5px 11px; }
     .card .links { display: flex; gap: 16px; margin-top: 12px; }
     .card .links .soon { font-family: var(--font-mono); font-size: 12px; color: var(--slate); border: 1px dashed var(--lightest-navy); border-radius: 4px; padding: 3px 9px; }
+    .card .links a { font-family: var(--font-mono); font-size: 12px; color: var(--green); border: 1px solid var(--green-tint); border-radius: 4px; padding: 3px 9px; transition: background 0.2s, border-color 0.2s; }
+    .card .links a:hover { background: var(--green-tint); border-color: var(--green); }
+    .card .proof { font-family: var(--font-mono); font-size: 12px; color: var(--light-slate); margin-top: 8px; }
+    .card .proof b { color: var(--green); font-weight: 600; }
     .group-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin: 24px 0 6px; }
     .group-label:first-child { margin-top: 0; }
     @media (max-width: 600px) { .card { grid-template-columns: 1fr; margin: 0 0 12px; } }
@@ -177,18 +181,19 @@
         <div class="card">
           <div class="meta">Personal project</div>
           <div>
-            <h3>thesis-engine</h3>
-            <div class="desc">A multi-agent Claude research engine for investment theses: writes a falsifiable litmus test, decomposes the market into solution-oriented categories, runs parallel research agents, and outputs an IC-grade, sourced report.</div>
-            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
-            <div class="links"><span class="soon">Repo &amp; demo coming soon</span></div>
+            <h3>Precept</h3>
+            <div class="desc">A compiler from Claude Code corrections to enforcement: the mechanically-checkable subset of what you correct compiles into a hook that blocks the mistake, not a note that nudges. The rest is labeled soft, and the hard/soft boundary is enforced in the type system rather than asserted.</div>
+            <div class="proof">Deterministic eval: <b>100% recall, 0 false-blocks</b> on a committed golden set. 250 hermetic tests.</div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code hooks</span><span class="tag">Pydantic</span><span class="tag">Evals</span></div>
+            <div class="links"><a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener">GitHub →</a></div>
           </div>
         </div>
         <div class="card">
           <div class="meta">Personal project</div>
           <div>
-            <h3>Precept</h3>
-            <div class="desc">A session-to-artifacts compiler for Claude Code: turns how you work into durable, reusable, hard-enforced rules and a queryable knowledge index, with an eval harness to prove it.</div>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code hooks</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
+            <h3>thesis-engine</h3>
+            <div class="desc">A multi-agent Claude research engine for investment theses: writes a falsifiable litmus test, decomposes the market into solution-oriented categories, runs parallel research agents, and outputs an IC-grade, sourced report.</div>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
             <div class="links"><span class="soon">Repo &amp; demo coming soon</span></div>
           </div>
         </div>
