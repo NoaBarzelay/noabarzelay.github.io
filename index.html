@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noa Barzelay — Technical Product Manager</title>
+  <meta name="description" content="Noa Barzelay — Technical PM spanning hyperscale engineering, growth ownership, and market insight." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a192f;
+      --light-navy: #112240;
+      --lightest-navy: #233554;
+      --slate: #8892b0;
+      --light-slate: #a8b2d1;
+      --lightest-slate: #ccd6f6;
+      --white: #e6f1ff;
+      --green: #818cf8;
+      --green-tint: rgba(129, 140, 248, 0.14);
+      --spot: rgba(129, 140, 248, 0.12);
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Roboto Mono', 'SF Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--navy);
+      color: var(--slate);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+    #spotlight {
+      pointer-events: none; position: fixed; inset: 0; z-index: 10;
+      background: radial-gradient(600px at 50% 0%, var(--spot), transparent 80%);
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--green-tint); }
+
+    .layout { max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 1024px) { .layout { display: flex; gap: 48px; padding: 0 56px; } }
+
+    /* LEFT (sticky) */
+    header.left { padding: 60px 0 24px; }
+    @media (min-width: 1024px) {
+      header.left {
+        position: sticky; top: 0; height: 100vh; width: 40%;
+        display: flex; flex-direction: column; justify-content: space-between; padding: 88px 0;
+      }
+    }
+    h1.name { color: var(--lightest-slate); font-size: clamp(34px, 5vw, 46px); font-weight: 800; letter-spacing: -0.02em; }
+    h2.title { color: var(--light-slate); font-size: 16px; font-weight: 500; margin-top: 14px; max-width: 480px; line-height: 1.5; }
+    .tagline-accent { color: var(--green); }
+
+    .quicklinks { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 13px;
+      color: var(--green); border: 1px solid var(--green); border-radius: 5px; padding: 10px 16px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:hover { background: var(--green-tint); }
+    .btn:active { transform: translateY(1px); }
+    .btn svg { width: 16px; height: 16px; }
+
+    nav.side { margin-top: 44px; display: none; }
+    @media (min-width: 1024px) { nav.side { display: block; } }
+    nav.side ul { list-style: none; }
+    nav.side a {
+      display: inline-flex; align-items: center; gap: 14px; padding: 11px 0;
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--slate); transition: color 0.2s;
+    }
+    nav.side a .indicator { height: 1px; width: 32px; background: var(--slate); transition: width 0.2s, background 0.2s; }
+    nav.side a:hover, nav.side a.active { color: var(--lightest-slate); }
+    nav.side a:hover .indicator, nav.side a.active .indicator { width: 56px; background: var(--lightest-slate); }
+
+    .socials { display: flex; gap: 20px; margin-top: 36px; }
+    .socials a { color: var(--slate); transition: color 0.2s, transform 0.2s; }
+    .socials a:hover { color: var(--green); transform: translateY(-3px); }
+    .socials svg { width: 21px; height: 21px; }
+
+    /* RIGHT (scroll) */
+    main.right { padding: 60px 0 55vh; }
+    @media (min-width: 1024px) { main.right { width: 60%; padding: 88px 0 55vh; } }
+
+    section { margin-bottom: 76px; scroll-margin-top: 24px; }
+    .section-label {
+      display: flex; align-items: center; gap: 16px;
+      font-family: var(--font-mono); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 28px;
+    }
+    .section-label::after {
+      content: ""; flex: 1 1 auto; height: 1px;
+      background: linear-gradient(to right, var(--lightest-navy), transparent);
+    }
+    @media (max-width: 1023px) {
+      .section-label {
+        position: sticky; top: 0; z-index: 5;
+        background: color-mix(in srgb, var(--navy) 92%, transparent); backdrop-filter: blur(8px);
+        padding: 14px 24px 14px; margin: 0 -24px 18px; color: var(--lightest-slate);
+      }
+      .section-label::after { display: none; }
+    }
+
+    .card {
+      display: grid; grid-template-columns: 128px 1fr; gap: 6px 22px;
+      padding: 18px; margin: 0 -18px 6px; border-radius: 8px;
+      border: 1px solid transparent; transition: background 0.2s, border-color 0.2s;
+    }
+    .card:hover { background: rgba(255,255,255,0.03); border-color: var(--green-tint); }
+    .card .meta { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.03em; color: var(--slate); padding-top: 4px; }
+    .card .meta .loc { display: block; color: var(--slate); opacity: 0.7; margin-top: 3px; }
+    .card h3 { color: var(--lightest-slate); font-size: 16px; font-weight: 600; }
+    .card h3 .org { color: var(--green); }
+    .card .ctx { font-size: 13px; color: var(--slate); font-style: italic; margin-top: 3px; }
+    .card .desc { font-size: 14px; margin-top: 8px; color: var(--light-slate); }
+    .card ul.bullets { list-style: none; margin-top: 10px; display: grid; gap: 7px; }
+    .card ul.bullets li { position: relative; padding-left: 18px; font-size: 13.5px; color: var(--light-slate); line-height: 1.5; }
+    .card ul.bullets li::before { content: "▹"; position: absolute; left: 0; color: var(--green); }
+    .card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { font-family: var(--font-mono); font-size: 11px; color: var(--green); background: var(--green-tint); border-radius: 999px; padding: 5px 11px; }
+    .card .links { display: flex; gap: 16px; margin-top: 12px; }
+    .card .links .soon { font-family: var(--font-mono); font-size: 12px; color: var(--slate); border: 1px dashed var(--lightest-navy); border-radius: 4px; padding: 3px 9px; }
+    .group-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin: 24px 0 6px; }
+    .group-label:first-child { margin-top: 0; }
+    @media (max-width: 600px) { .card { grid-template-columns: 1fr; margin: 0 0 12px; } }
+
+    .contact-list { list-style: none; display: grid; gap: 13px; }
+    .contact-list li { font-size: 15px; color: var(--light-slate); display: flex; align-items: center; gap: 14px; }
+    .contact-list a { transition: color 0.2s; }
+    .contact-list a:hover { color: var(--green); }
+    .contact-list .k { font-family: var(--font-mono); font-size: 12px; color: var(--slate); width: 84px; flex: none; }
+  </style>
+</head>
+<body>
+  <div id="spotlight"></div>
+
+  <div class="layout">
+    <!-- LEFT -->
+    <header class="left">
+      <div>
+        <h1 class="name">Noa Barzelay</h1>
+        <h2 class="title">Technical PM spanning hyperscale engineering, growth ownership, and market insight <span class="tagline-accent">-</span> built ML platform at Microsoft, owned predictive-AI product part of a $300M exit, venture-capital investing in AI infra, enterprise &amp; security.</h2>
+
+        <div class="quicklinks">
+          <a class="btn" href="resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Résumé (PDF)
+          </a>
+          <a class="btn" href="https://linkedin.com/in/noa-barzelay" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <nav class="side" aria-label="In-page">
+          <ul>
+            <li><a href="#projects"><span class="indicator"></span> Personal Projects</a></li>
+            <li><a href="#experience"><span class="indicator"></span> Experience</a></li>
+            <li><a href="#education"><span class="indicator"></span> Education</a></li>
+            <li><a href="#contact"><span class="indicator"></span> Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </header>
+
+    <!-- RIGHT -->
+    <main class="right">
+      <!-- Projects (open source) -->
+      <section id="projects">
+        <div class="section-label">Personal Projects</div>
+        <div class="card">
+          <div class="meta">Personal project</div>
+          <div>
+            <h3>thesis-engine</h3>
+            <div class="desc">A multi-agent Claude research engine for investment theses: writes a falsifiable litmus test, decomposes the market into solution-oriented categories, runs parallel research agents, and outputs an IC-grade, sourced report.</div>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
+            <div class="links"><span class="soon">Repo &amp; demo coming soon</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="meta">Personal project</div>
+          <div>
+            <h3>Precept</h3>
+            <div class="desc">A session-to-artifacts compiler for Claude Code: turns how you work into durable, reusable, hard-enforced rules and a queryable knowledge index, with an eval harness to prove it.</div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code hooks</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
+            <div class="links"><span class="soon">Repo &amp; demo coming soon</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience (exact from resume) -->
+      <section id="experience">
+        <div class="section-label">Experience</div>
+
+        <div class="group-label">Product &amp; Engineering</div>
+        <div class="card">
+          <div class="meta">2023 — 2025<span class="loc">Tel Aviv, IL</span></div>
+          <div>
+            <h3>Product Manager <span class="org">· Wenrix</span></h3>
+            <div class="ctx">Enterprise predictive-AI platform for flight pricing optimization, powering 60+ Online Travel Agencies. Acquired by Etraveli for $300M (12/2025).</div>
+            <ul class="bullets">
+              <li>Owned Wenrix's core predictive-pricing platform (~60% of company revenue); drove roadmap through R&amp;D and GTM to +$2M annual revenue increase (10%) in 10 months via usage and margin expansion.</li>
+              <li>Led cross-functional team of 15 engineers, researchers and sales in launching two new products, from customer discovery to activation and monetization utilizing A/B-tested rollouts; +$2.5M ARR (12% of company revenue) in 6 months.</li>
+              <li>Drove enterprise adoption, including nine strategic contracts, owning product engagements with enterprise executives on needs and outcomes, technical integration (APIs, custom builds) and quality, security and cost trade-offs.</li>
+              <li>Ideated and launched AI automation + infra platform to cut new-customer time-to-value 30% with roadmap to self-serve offering unlocking the long-tail market (~3x revenue potential).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="meta">2020 — 2023<span class="loc">Herzliya, IL</span></div>
+          <div>
+            <h3>Software Engineer → Software Engineer II <span class="org">· Microsoft</span></h3>
+            <div class="ctx">Microsoft Defender for Endpoint (protecting 500M+ devices, monitoring 10T+ events/day). Fast-tracked to SWE II in 11 months.</div>
+            <ul class="bullets">
+              <li>Owned core ML-based detection services and KPIs, re-architecting the platform for hyperscale, migrating it to Kubernetes with zero-data-loss cutover and cutting production errors from thousands per hour to tens.</li>
+              <li>Initiated and led 4 engineers in building a CI/CD platform validating and automatically mitigating platform quality regressions, improving DORA metrics; now the safety standard across three engineering groups.</li>
+              <li>Built a self-serve researcher/developer platform to ship new cybersecurity ML logic, cutting time-to-protection against emerging threats from months to hours; widely adopted.</li>
+              <li>Cut platform compute up to 30% ($3M/yr) and sped core processing up to ~5x through re-prioritizing detection workloads by impact, algorithmic optimization, and demand-based autoscaling.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="group-label">Tech Investing</div>
+        <div class="card">
+          <div class="meta">2026 — Present<span class="loc">New York, NY</span></div>
+          <div>
+            <h3>MBA Investment Associate <span class="org">· Antler</span></h3>
+            <div class="ctx">Global venture capital fund; $1.5B AUM; 1500+ investments.</div>
+            <ul class="bullets">
+              <li>Source and lead deals driven by authored technical investment theses on how AI reshapes enterprise software, infrastructure, and security (including agentic-AI security, computer-use agents, GPU/TPU neoclouds).</li>
+              <li>Build and own a multi-agent research and deal-sourcing platform used across the investment team.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="meta">2025<span class="loc">New York, NY</span></div>
+          <div>
+            <h3>MBA Investment Associate, Founding Member <span class="org">· Canopy</span></h3>
+            <div class="ctx">Stealth venture capital fund investing in AI infrastructure.</div>
+            <ul class="bullets">
+              <li>Identified and evaluated AI infrastructure startups incl. market breakdown, growth trajectory, technical product and roadmap.</li>
+              <li>Designed and built an agentic deal-sourcing and evaluation framework, identifying high-potential AI infrastructure ventures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="group-label">Israel Defense Forces</div>
+        <div class="card">
+          <div class="meta">2014 — 2017<span class="loc">Israel</span></div>
+          <div>
+            <h3>Flight Academy Cadet → Aerial Operations Officer</h3>
+            <ul class="bullets">
+              <li>Directed real-time missions of Israeli Air Force aircraft, helicopter, and UAV; led a team of officers and collaborated daily with IAF Generals and with the US Air Force in joint counter-terrorism missions involving 50+ personnel.</li>
+              <li>Selected to the elite IAF Pilots Course (~4% admission); reached top-quartile and remained the last woman in the squadron.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education (exact from resume) -->
+      <section id="education">
+        <div class="section-label">Education</div>
+        <div class="card">
+          <div class="meta">2025 — 2026<span class="loc">New York, NY</span></div>
+          <div>
+            <h3>MBA <span class="org">· Columbia Business School</span></h3>
+            <ul class="bullets">
+              <li>GMAT Score: 780 (99th percentile).</li>
+              <li>Honors: Dean's List (9.63/10 GPA); merit-based scholarship, 65% of tuition.</li>
+              <li>Extracurricular: AI Club, Tech Club, VC Club, Entrepreneurship Club Vice President.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="meta">2018 — 2022<span class="loc">Tel Aviv, IL</span></div>
+          <div>
+            <h3>BS, Computer Science &amp; Economics (Double Major) <span class="org">· Tel Aviv University</span></h3>
+            <ul class="bullets">
+              <li>Honors: Magna Cum Laude in Economics (95th percentile); Academic Excellence Scholarship.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="section-label">Contact</div>
+        <ul class="contact-list">
+          <li><span class="k">Email</span><a href="mailto:noabarzelay@gmail.com">noabarzelay@gmail.com</a></li>
+          <li><span class="k">LinkedIn</span><a href="https://linkedin.com/in/noa-barzelay" target="_blank" rel="noopener">linkedin.com/in/noa-barzelay</a></li>
+          <li><span class="k">Location</span><span>New York, NY / Tel Aviv, IL</span></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Spotlight follows cursor
+    const spot = document.getElementById('spotlight');
+    window.addEventListener('pointermove', (e) => {
+      spot.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, var(--spot), transparent 80%)`;
+    });
+
+    // Active nav: highlight the last section scrolled past a threshold.
+    // Deterministic (no observer bands) so every section, including the last ones, lights up.
+    const navLinks = [...document.querySelectorAll('nav.side a')];
+    const sections = [...document.querySelectorAll('main section')];
+    const setActive = (id) => navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    const OFFSET = 140;
+    function updateActive() {
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (atBottom) { setActive(sections[sections.length - 1].id); return; }
+      let current = sections[0].id;
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= OFFSET) current = s.id; else break;
+      }
+      setActive(current);
+    }
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+    updateActive();
+  </script>
+</body>
+</html>

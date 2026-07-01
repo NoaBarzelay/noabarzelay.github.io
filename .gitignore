@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+resume/*.pdf
+!resume/Noa-Barzelay-Resume.pdf
+.vercel
