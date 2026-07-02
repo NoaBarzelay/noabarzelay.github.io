@@ -163,9 +163,9 @@
 
         <nav class="side" aria-label="In-page">
           <ul>
-            <li><a href="#projects"><span class="indicator"></span> Personal Projects</a></li>
             <li><a href="#experience"><span class="indicator"></span> Experience</a></li>
             <li><a href="#education"><span class="indicator"></span> Education</a></li>
+            <li><a href="#projects"><span class="indicator"></span> Personal Projects</a></li>
             <li><a href="#contact"><span class="indicator"></span> Contact</a></li>
           </ul>
         </nav>
@@ -175,30 +175,6 @@
 
     <!-- RIGHT -->
     <main class="right">
-      <!-- Projects (open source) -->
-      <section id="projects">
-        <div class="section-label">Personal Projects</div>
-        <div class="card">
-          <div class="meta">Personal project</div>
-          <div>
-            <h3>Precept</h3>
-            <div class="desc">A compiler from Claude Code corrections to enforcement: the mechanically-checkable subset of what you correct compiles into a hook that blocks the mistake, not a note that nudges. The rest is labeled soft, and the hard/soft boundary is enforced in the type system rather than asserted.</div>
-            <div class="proof">Deterministic eval: <b>100% recall, 0 false-blocks</b> on a committed golden set. 250 hermetic tests.</div>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code hooks</span><span class="tag">Pydantic</span><span class="tag">Evals</span></div>
-            <div class="links"><a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener">GitHub →</a></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="meta">Personal project</div>
-          <div>
-            <h3>thesis-engine</h3>
-            <div class="desc">A multi-agent Claude research engine for investment theses: writes a falsifiable litmus test, decomposes the market into solution-oriented categories, runs parallel research agents, and outputs an IC-grade, sourced report.</div>
-            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
-            <div class="links"><span class="soon">Repo &amp; demo coming soon</span></div>
-          </div>
-        </div>
-      </section>
-
       <!-- Experience (exact from resume) -->
       <section id="experience">
         <div class="section-label">Experience</div>
@@ -289,6 +265,30 @@
             <ul class="bullets">
               <li>Honors: Magna Cum Laude in Economics (95th percentile); Academic Excellence Scholarship.</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personal projects -->
+      <section id="projects">
+        <div class="section-label">Personal Projects</div>
+        <div class="card">
+          <div class="meta">Personal project</div>
+          <div>
+            <h3>Precept</h3>
+            <div class="desc">A self-improving platform for agentic AI work: it catalogs how you work with an agent, and the data those workflows act on, as typed, reusable artifacts. The invariants among them compile into Claude Code hooks that block a mistake, not notes the model can ignore.</div>
+            <div class="proof">Deterministic eval: <b>100% recall, 0 false-blocks</b> on a committed golden set. 250 hermetic tests.</div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Claude Code hooks</span><span class="tag">Pydantic</span><span class="tag">Evals</span></div>
+            <div class="links"><a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener">GitHub →</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="meta">Personal project</div>
+          <div>
+            <h3>Thesis Engine</h3>
+            <div class="desc">A multi-agent Claude research engine for investment theses: writes a falsifiable litmus test, decomposes the market into solution-oriented categories, runs parallel research agents, and outputs an IC-grade, sourced report.</div>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Anthropic SDK</span><span class="tag">MCP</span><span class="tag">Evals</span></div>
+            <div class="links"><span class="soon">In active development</span></div>
           </div>
         </div>
       </section>
