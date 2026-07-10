@@ -1,56 +1,93 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Generator for the cyber-tech variant: index + 2 essays + 2 decision pages + shared css.
+Personal-site backbone: the hero H1 is Noa's NAME; the tagline is the subhead."""
+import html, re, pathlib
+
+ROOT = pathlib.Path("/private/tmp/claude-502/-Users-noabarzelay/c749ac7a-cd54-459e-8006-33213de10a5d/scratchpad/redesign-wt")
+CONTENT = ROOT / "_content"
+OUT = ROOT / "variants" / "cyber"
+(OUT / "writing").mkdir(parents=True, exist_ok=True)
+(OUT / "notes").mkdir(parents=True, exist_ok=True)
+
+FONTS = ("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700"
+         "&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap")
+FAVICON = ("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E"
+           "%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23070810'/%3E"
+           "%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E"
+           "%3Cstop%20offset='0'%20stop-color='%236EE7F5'/%3E%3Cstop%20offset='1'%20stop-color='%23C08CFF'/%3E"
+           "%3C/linearGradient%3E%3C/defs%3E"
+           "%3Ctext%20x='50'%20y='68'%20font-family='monospace'%20font-size='46'%20font-weight='700'%20"
+           "text-anchor='middle'%20fill='url(%23g)'%3ENB%3C/text%3E%3C/svg%3E")
+
+def inline(t):
+    o = html.escape(t, quote=False)
+    o = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", o, flags=re.S)
+    o = re.sub(r"`([^`]+)`", r"<code>\1</code>", o)
+    return o
+
+def md_to_body(md):
+    comments = re.findall(r"<!--.*?-->", md, flags=re.S)
+    md_wo = re.sub(r"<!--.*?-->", "", md, flags=re.S)
+    title, parts = "", []
+    for block in re.split(r"\n\s*\n", md_wo.strip()):
+        block = block.strip()
+        if not block:
+            continue
+        if block.startswith("# "):
+            title = block[2:].strip()
+        elif block.startswith("## "):
+            parts.append(f'      <h2>{inline(block[3:].strip())}</h2>')
+        else:
+            parts.append(f"      <p>{inline(block)}</p>")
+    body = "\n".join(parts)
+    if comments:
+        body += "\n" + "\n".join(comments)
+    return title, body
+
+HEAD = """<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>Noa Barzelay</title>
-  <meta name="description" content="Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.">
-  <meta property="og:title" content="Noa Barzelay">
-  <meta property="og:description" content="Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.">
-  <meta property="og:type" content="website">
+  <title>{title}</title>
+  <meta name="description" content="{desc}">
+  <meta property="og:title" content="{ogtitle}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:type" content="{ogtype}">
   <meta property="og:site_name" content="Noa Barzelay">
   <meta name="author" content="Noa Barzelay">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23070810'/%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%236EE7F5'/%3E%3Cstop%20offset='1'%20stop-color='%23C08CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x='50'%20y='68'%20font-family='monospace'%20font-size='46'%20font-weight='700'%20text-anchor='middle'%20fill='url(%23g)'%3ENB%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="{favicon}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<!-- tagline options: (1) I build agentic AI tooling and invest in early-stage AI infrastructure. (2) Software engineer at Microsoft, product at Wenrix, now investing at Antler. (3) Early-stage AI investor at Antler; I build agentic AI tooling in my free time. -->
-<body>
-  <div class="bg" aria-hidden="true">
+  <link href="{fonts}" rel="stylesheet">
+  <link rel="stylesheet" href="{css}">
+</head>"""
+
+def head(title, desc, ogtitle, ogtype, css):
+    return HEAD.format(title=html.escape(title), desc=html.escape(desc, quote=True),
+                       ogtitle=html.escape(ogtitle, quote=True), ogtype=ogtype,
+                       favicon=FAVICON, fonts=FONTS, css=css)
+
+BG = """  <div class="bg" aria-hidden="true">
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-vignette"></div>
-  </div>
-  <header class="nav">
-    <a class="wordmark" href="index.html"><span class="wm-dot"></span>Noa Barzelay</a>
+  </div>"""
+
+def nav(prefix=""):
+    return f"""  <header class="nav">
+    <a class="wordmark" href="{prefix}index.html"><span class="wm-dot"></span>Noa Barzelay</a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="index.html#projects">Projects</a>
-      <a href="index.html#writing">Writing</a>
-      <a href="index.html#experience">Experience</a>
+      <a href="{prefix}index.html#projects">Projects</a>
+      <a href="{prefix}index.html#writing">Writing</a>
+      <a href="{prefix}index.html#experience">Experience</a>
       <a class="nav-cta" href="mailto:noabarzelay@gmail.com">Contact</a>
     </nav>
-  </header>
-  <main id="main">
+  </header>"""
 
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="tick"></span>INVESTOR &amp; BUILDER // NEW YORK</p>
-        <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
-        <p class="hero-title">I build agentic AI tooling and invest in early-stage AI infrastructure.</p>
-        <p class="hero-body">I started as a software engineer at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, building the ML detection platform behind Defender for Endpoint. I then moved into product at <a href="https://www.wenrix.com">Wenrix</a>, an AI airfare pricing startup acquired by Etraveli for $300M, where I owned the core predictive-pricing platform. I now invest at <a href="https://www.antler.co">Antler</a> in New York while completing my MBA at <a href="https://business.columbia.edu">Columbia Business School</a>. In my free time I build agentic AI tooling.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
-          <a class="btn" href="https://github.com/NoaBarzelay">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
-          <a class="btn" href="https://linkedin.com/in/noa-barzelay">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
-          <a class="btn" href="mailto:noabarzelay@gmail.com">Email</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-      <svg class="fanout" viewBox="0 0 420 300" fill="none" aria-hidden="true">
+HERO_SVG = """      <svg class="fanout" viewBox="0 0 420 300" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="#6EE7F5" stop-opacity="0.1"/>
@@ -83,7 +120,29 @@
           <circle cx="300" cy="256" r="4" class="node"/>
           <circle cx="388" cy="150" r="5.5" class="node node-out"/>
         </g>
-      </svg>
+      </svg>"""
+
+def index_page():
+    body = f"""<body>
+{BG}
+{nav()}
+  <main id="main">
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="tick"></span>INVESTOR &amp; BUILDER // NEW YORK</p>
+        <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
+        <p class="hero-title">I build agentic AI tooling and invest in early-stage AI infrastructure.</p>
+        <p class="hero-body">I started as a software engineer at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, building the ML detection platform behind Defender for Endpoint. I then moved into product at <a href="https://www.wenrix.com">Wenrix</a>, an AI airfare pricing startup acquired by Etraveli for $300M, where I owned the core predictive-pricing platform. I now invest at <a href="https://www.antler.co">Antler</a> in New York while completing my MBA at <a href="https://business.columbia.edu">Columbia Business School</a>. In my free time I build agentic AI tooling.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="../../resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
+          <a class="btn" href="https://github.com/NoaBarzelay">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
+          <a class="btn" href="https://linkedin.com/in/noa-barzelay">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
+          <a class="btn" href="mailto:noabarzelay@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+{HERO_SVG}
       </div>
     </section>
 
@@ -181,4 +240,51 @@
     </div>
   </footer>
 </body>
+</html>"""
+    doc = (head("Noa Barzelay",
+                "Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.",
+                "Noa Barzelay", "website", "styles.css")
+           + "\n" + body + "\n")
+    doc = doc.replace("<body>", "<!-- tagline options: (1) I build agentic AI tooling and invest in early-stage AI infrastructure. (2) Software engineer at Microsoft, product at Wenrix, now investing at Antler. (3) Early-stage AI investor at Antler; I build agentic AI tooling in my free time. -->\n<body>", 1)
+    (OUT / "index.html").write_text(doc, encoding="utf-8")
+    print("wrote index.html")
+
+def article_page(md_file, out_rel, kind, meta_extra, desc):
+    md = (CONTENT / md_file).read_text(encoding="utf-8")
+    title, body = md_to_body(md)
+    doc = head(f"{title} | Noa Barzelay", desc, title, "article", "../styles.css")
+    doc += f"""
+<body class="reading">
+{BG}
+{nav("../")}
+  <main id="main">
+    <article class="article">
+      <p class="crumb"><a href="../index.html">&larr; Noa Barzelay</a> <span class="crumb-sep">/</span> <span>{html.escape(kind)}</span></p>
+      <div class="article-eyebrow"><span class="w-kind">{html.escape(kind.upper())}</span><span class="dotsep">&middot;</span><span>{html.escape(meta_extra)}</span></div>
+      <h1 class="article-title">{html.escape(title)}</h1>
+      <p class="article-stand">{html.escape(desc)}</p>
+      <div class="article-body">
+{body}
+      </div>
+      <footer class="article-foot">
+        <a href="../index.html">&larr; Back to index</a>
+        <a href="mailto:noabarzelay@gmail.com">noabarzelay@gmail.com</a>
+      </footer>
+    </article>
+  </main>
+</body>
 </html>
+"""
+    (OUT / out_rel).write_text(doc, encoding="utf-8")
+    print("wrote", out_rel)
+
+index_page()
+article_page("essay-layer-beneath.md", "writing/layer-beneath.html", "Essay", "April 2026",
+             "A 45-product map of the coding-agent orchestrator market, and why the durable companies get built in the neutral cross-vendor governance, cost, and audit layer beneath the agents.")
+article_page("essay-agentic-security.md", "writing/agentic-security.html", "Essay", "2026",
+             "Prompt injection is social engineering, not SQL injection, so it will never be patched away, and the durable money in agent security sits in the boring containment and identity layers, not the headline firewall category the acquirers have already bought out.")
+article_page("precept-decisions.md", "notes/precept.html", "Notes", "Precept",
+             "Why I only claim enforcement for the deterministic subset, the eval that keeps that claim honest, and four decisions where I rejected the default.")
+article_page("thesis-decisions.md", "notes/thesis-engine.html", "Notes", "Thesis Engine",
+             "Owning the orchestration loop, sealing bring-your-own keys, failing loud but finishing, fixing the output schema, and gating merges on evals.")
+print("done")
