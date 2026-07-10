@@ -78,7 +78,6 @@ BG = """  <div class="bg" aria-hidden="true">
 
 def nav(prefix=""):
     return f"""  <header class="nav">
-    <a class="wordmark" href="{prefix}index.html"><span class="wm-dot"></span>Noa Barzelay</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="{prefix}index.html#projects">Projects</a>
       <a href="{prefix}index.html#writing">Writing</a>
