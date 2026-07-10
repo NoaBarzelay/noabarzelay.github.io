@@ -131,8 +131,8 @@ def index_page():
       <div class="hero-copy">
         <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
         <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
-        <p class="hero-title">I build agentic AI tooling and invest in early-stage AI infrastructure.</p>
-        <p class="hero-body">I started as a software engineer at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, building the ML detection platform behind Defender for Endpoint. I then moved into product at <a href="https://www.wenrix.com">Wenrix</a>, an AI airfare pricing startup acquired by Etraveli for $300M, where I owned the core predictive-pricing platform. I now invest at <a href="https://www.antler.co">Antler</a> in New York while completing my MBA at <a href="https://business.columbia.edu">Columbia Business School</a>. In my free time I build agentic AI tooling.</p>
+        <p class="hero-title">I ship AI products from the systems up.</p>
+        <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co">Antler</a>.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="../../resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
           <a class="btn" href="https://github.com/NoaBarzelay">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
@@ -244,7 +244,7 @@ def index_page():
                 "Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.",
                 "Noa Barzelay", "website", "styles.css")
            + "\n" + body + "\n")
-    doc = doc.replace("<body>", "<!-- tagline options: (1) I build agentic AI tooling and invest in early-stage AI infrastructure. (2) Software engineer at Microsoft, product at Wenrix, now investing at Antler. (3) Early-stage AI investor at Antler; I build agentic AI tooling in my free time. -->\n<body>", 1)
+    doc = doc.replace("<body>", "<!-- subhead options: (A) I ship AI products from the systems up. (B) Engineer turned product manager, building technical AI products. (C) A product manager who codes, building AI products end to end. (D) I build AI products with an engineer's depth. -->\n<body>", 1)
     (OUT / "index.html").write_text(doc, encoding="utf-8")
     print("wrote index.html")
 
