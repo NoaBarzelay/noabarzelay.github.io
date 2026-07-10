@@ -82,7 +82,6 @@ def nav(prefix=""):
       <a href="{prefix}index.html#projects">Projects</a>
       <a href="{prefix}index.html#writing">Writing</a>
       <a href="{prefix}index.html#experience">Experience</a>
-      <a class="nav-cta" href="mailto:noabarzelay@gmail.com">Contact</a>
     </nav>
   </header>"""
 
