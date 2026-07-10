@@ -130,7 +130,7 @@ def index_page():
 
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="tick"></span>INVESTOR &amp; BUILDER // NEW YORK</p>
+        <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
         <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
         <p class="hero-title">I build agentic AI tooling and invest in early-stage AI infrastructure.</p>
         <p class="hero-body">I started as a software engineer at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, building the ML detection platform behind Defender for Endpoint. I then moved into product at <a href="https://www.wenrix.com">Wenrix</a>, an AI airfare pricing startup acquired by Etraveli for $300M, where I owned the core predictive-pricing platform. I now invest at <a href="https://www.antler.co">Antler</a> in New York while completing my MBA at <a href="https://business.columbia.edu">Columbia Business School</a>. In my free time I build agentic AI tooling.</p>
