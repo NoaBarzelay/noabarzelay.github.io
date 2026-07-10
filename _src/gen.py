@@ -131,7 +131,7 @@ def index_page():
       <div class="hero-copy">
         <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
         <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
-        <p class="hero-title">I ship AI products from the systems up.</p>
+        <p class="hero-title">I love turning what frontier AI research makes possible into products people trust.</p>
         <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com" target="_blank" rel="noopener noreferrer">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co" target="_blank" rel="noopener noreferrer">Antler</a>.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="../../resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
@@ -231,7 +231,7 @@ def index_page():
                 "Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.",
                 "Noa Barzelay", "website", "styles.css")
            + "\n" + body + "\n")
-    doc = doc.replace("<body>", "<!-- subhead options: (A) I ship AI products from the systems up. (B) Engineer turned product manager, building technical AI products. (C) A product manager who codes, building AI products end to end. (D) I build AI products with an engineer's depth. -->\n<body>", 1)
+    doc = doc.replace("<body>", "<!-- subhead options (cover-letter grounded, technical): A I love turning what frontier AI research makes possible into products people trust. | B I build products with an engineer's depth, and I love the hard technical parts. | C I love taking AI products from first idea to launch, and knowing what to cut. | D I love products that reach across the stack, from the compute underneath to the person using them. | E I am driven by building autonomous AI products people can actually rely on. | F Obsessed with what people really need from AI, and building exactly that. -->\n<body>", 1)
     (OUT / "index.html").write_text(doc, encoding="utf-8")
     print("wrote index.html")
 
