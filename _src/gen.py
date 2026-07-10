@@ -132,11 +132,10 @@ def index_page():
         <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
         <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
         <p class="hero-title">I ship AI products from the systems up.</p>
-        <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co">Antler</a>.</p>
+        <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com" target="_blank" rel="noopener noreferrer">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co" target="_blank" rel="noopener noreferrer">Antler</a>.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="../../resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
-          <a class="btn" href="https://github.com/NoaBarzelay">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
-          <a class="btn" href="https://linkedin.com/in/noa-barzelay">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
+          <a class="btn" href="https://linkedin.com/in/noa-barzelay" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
           <a class="btn" href="mailto:noabarzelay@gmail.com">Email</a>
         </div>
       </div>
@@ -159,7 +158,7 @@ def index_page():
           <p>Precept is my personal, self-improving platform for agentic AI processes and data cataloging. It continuously learns from my sessions to improve its data catalog, its defined entities (rules, skills, agent personas, and more), and its processes, both through explicit direction and background learning.</p>
           <p>It runs on Claude Code hooks. Every rule it produces is badged as HARD or SOFT: HARD rules are enforced deterministically at the hook gate, SOFT rules only steer the model through context, and Precept never claims enforcement beyond the HARD tier. I measure its behavior with a deterministic eval harness that gates CI, backed by 250 tests.</p>
           <div class="card-links">
-            <a href="https://github.com/NoaBarzelay/precept">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
+            <a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener noreferrer">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
             <a href="notes/precept.html">Design decisions <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
