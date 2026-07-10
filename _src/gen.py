@@ -202,21 +202,9 @@ def index_page():
       </ul>
     </section>
 
-    <section id="now" class="block">
-      <div class="block-head">
-        <span class="idx">03</span><h2 class="block-title">Now</h2><span class="rule"></span>
-      </div>
-      <ul class="now-list">
-        <li><span class="prompt">&gt;</span>Building Precept, my self-improving platform for agentic AI. I use it daily.</li>
-        <li><span class="prompt">&gt;</span>Building Thesis Engine, a multi-agent research engine for investment theses.</li>
-        <li><span class="prompt">&gt;</span>Completing my MBA at Columbia Business School.</li>
-        <li><span class="prompt">&gt;</span>Investing at Antler in New York, currently focused on agentic AI security, computer-use agents, and AI infrastructure.</li>
-      </ul>
-    </section>
-
     <section id="experience" class="block">
       <div class="block-head">
-        <span class="idx">04</span><h2 class="block-title">Experience</h2><span class="rule"></span>
+        <span class="idx">03</span><h2 class="block-title">Experience</h2><span class="rule"></span>
       </div>
       <div class="timeline">
         <div class="exp"><div class="exp-yr">2026&ndash;present</div><div class="exp-body"><h3>MBA Investment Associate <span class="org">Antler</span></h3><p>Source and lead deals driven by my own technical investment theses on how AI reshapes enterprise software, infrastructure, and security.</p></div></div>
