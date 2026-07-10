@@ -250,6 +250,9 @@ def index_page():
       <span class="foot-loc">New York, NY / Tel Aviv, IL</span>
     </div>
   </footer>
+  <!-- GoatCounter privacy-friendly analytics (free). Register the code "noabarzelay" at https://www.goatcounter.com/ ;
+       if that code is taken, pick another and replace it in the URL below (one place per page). -->
+  <script data-goatcounter="https://noabarzelay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>"""
     doc = (head("Noa Barzelay",
@@ -283,6 +286,9 @@ def article_page(md_file, out_rel, kind, meta_extra, desc):
       </footer>
     </article>
   </main>
+  <!-- GoatCounter privacy-friendly analytics (free). Register the code "noabarzelay" at https://www.goatcounter.com/ ;
+       if that code is taken, pick another and replace it in the URL below (one place per page). -->
+  <script data-goatcounter="https://noabarzelay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
