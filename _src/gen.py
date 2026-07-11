@@ -82,6 +82,7 @@ def nav(prefix=""):
       <a href="{prefix}index.html#projects">Projects</a>
       <a href="{prefix}index.html#writing">Writing</a>
       <a href="{prefix}index.html#experience">Experience</a>
+      <a href="{prefix}index.html#interests">Other Interests</a>
     </nav>
   </header>"""
 

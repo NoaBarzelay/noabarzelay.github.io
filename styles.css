@@ -247,7 +247,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--cyan); outline-of
 }
 @media (max-width: 620px) {
   .nav { padding: 14px 18px; }
-  .nav-links { gap: 15px; }
+  .nav-links { gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
   main, .foot { padding-left: 18px; padding-right: 18px; }
   .block { padding: 52px 0; }
   .exp { grid-template-columns: 1fr; gap: 4px; }
