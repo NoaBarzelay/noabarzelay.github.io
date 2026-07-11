@@ -268,3 +268,14 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--cyan); outline-of
   border-radius: 50%; background: var(--grad); opacity: 0.85; }
 .int-list em { color: var(--text); font-style: italic; }
 @media (max-width: 700px) { .interests { grid-template-columns: 1fr; gap: 34px; } }
+
+/* ---------- experience + education detail (resume bullets) ---------- */
+.exp-loc { display: block; color: var(--text-3); opacity: 0.8; margin-top: 2px; font-size: 12px; }
+.exp-context { font-size: 13px; color: var(--text-3); font-style: italic; margin-top: 4px; line-height: 1.5; }
+.exp-bullets { list-style: none; display: grid; gap: 8px; margin-top: 12px; }
+.exp-bullets li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.55; color: var(--text-2); }
+.exp-bullets li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--grad); opacity: 0.8; }
+.exp-group { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3); margin: 30px 0 14px; }
+.block .exp-group:first-of-type { margin-top: 0; }
