@@ -168,7 +168,7 @@ def index_page():
             <h3>Thesis Engine</h3>
             <div class="taglist"><span class="pill">TypeScript</span><span class="pill">Multi-agent</span><span class="pill status">In development</span></div>
           </div>
-          <p>Thesis Engine is my multi-agent research engine for venture capital investment theses and deal sourcing. It takes a thesis broad idea, writes a falsifiable litmus test, decomposes the market into solution-oriented categories, and outputs a sourced report with a ranked list of potential investments.</p>
+          <p>Thesis Engine is my multi-agent research engine for venture capital investment theses and deal sourcing. It takes a broad thesis idea, writes a falsifiable litmus test, decomposes the market into solution-oriented categories, and outputs a sourced report with a ranked list of potential investments.</p>
           <p>The pipeline begins with a planner that writes the litmus test, a falsifiable rule for what qualifies as a fit, and I review and edit it before any research runs. Parallel agents then research each category, an adversarial critic deduplicates companies across categories and flags thin evidence, and a scoring stage ranks what survives against my investment criteria. A deterministic eval harness runs in CI on every push.</p>
           <div class="card-links">
             <a href="notes/thesis-engine.html">Design decisions <span aria-hidden="true">&rarr;</span></a>
