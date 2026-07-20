@@ -1,55 +1,93 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Generator for the cyber-tech variant: index + 1 essay + 2 decision pages + shared css.
+Personal-site backbone: the hero H1 is Noa's NAME; the tagline is the subhead."""
+import html, re, pathlib
+
+ROOT = pathlib.Path("/private/tmp/claude-502/-Users-noabarzelay/c749ac7a-cd54-459e-8006-33213de10a5d/scratchpad/redesign-wt")
+CONTENT = ROOT / "_content"
+OUT = ROOT / "variants" / "cyber"
+(OUT / "writing").mkdir(parents=True, exist_ok=True)
+(OUT / "notes").mkdir(parents=True, exist_ok=True)
+
+FONTS = ("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700"
+         "&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap")
+FAVICON = ("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E"
+           "%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23070810'/%3E"
+           "%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E"
+           "%3Cstop%20offset='0'%20stop-color='%236EE7F5'/%3E%3Cstop%20offset='1'%20stop-color='%23C08CFF'/%3E"
+           "%3C/linearGradient%3E%3C/defs%3E"
+           "%3Ctext%20x='50'%20y='68'%20font-family='monospace'%20font-size='46'%20font-weight='700'%20"
+           "text-anchor='middle'%20fill='url(%23g)'%3ENB%3C/text%3E%3C/svg%3E")
+
+def inline(t):
+    o = html.escape(t, quote=False)
+    o = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", o, flags=re.S)
+    o = re.sub(r"`([^`]+)`", r"<code>\1</code>", o)
+    return o
+
+def md_to_body(md):
+    comments = re.findall(r"<!--.*?-->", md, flags=re.S)
+    md_wo = re.sub(r"<!--.*?-->", "", md, flags=re.S)
+    title, parts = "", []
+    for block in re.split(r"\n\s*\n", md_wo.strip()):
+        block = block.strip()
+        if not block:
+            continue
+        if block.startswith("# "):
+            title = block[2:].strip()
+        elif block.startswith("## "):
+            parts.append(f'      <h2>{inline(block[3:].strip())}</h2>')
+        else:
+            parts.append(f"      <p>{inline(block)}</p>")
+    body = "\n".join(parts)
+    if comments:
+        body += "\n" + "\n".join(comments)
+    return title, body
+
+HEAD = """<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>Noa Barzelay</title>
-  <meta name="description" content="Noa Barzelay, technical product manager spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at Microsoft, owned a predictive-AI product through a $300M exit, now investing in AI infrastructure, enterprise, and security.">
-  <meta property="og:title" content="Noa Barzelay">
-  <meta property="og:description" content="Noa Barzelay, technical product manager spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at Microsoft, owned a predictive-AI product through a $300M exit, now investing in AI infrastructure, enterprise, and security.">
-  <meta property="og:type" content="website">
+  <title>{title}</title>
+  <meta name="description" content="{desc}">
+  <meta property="og:title" content="{ogtitle}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:type" content="{ogtype}">
   <meta property="og:site_name" content="Noa Barzelay">
   <meta name="author" content="Noa Barzelay">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='24'%20fill='%23070810'/%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%236EE7F5'/%3E%3Cstop%20offset='1'%20stop-color='%23C08CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext%20x='50'%20y='68'%20font-family='monospace'%20font-size='46'%20font-weight='700'%20text-anchor='middle'%20fill='url(%23g)'%3ENB%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="{favicon}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<!-- subhead (honest, no lab/research overclaim) options: A1 I'm passionate about turning what AI makes possible into products people trust. | A2 I love turning powerful AI into products people can trust. | A3 I love turning complex technology into products people rely on. | A4 I love building products on top of powerful AI, the kind people actually trust. -->
-<body>
-  <div class="bg" aria-hidden="true">
+  <link href="{fonts}" rel="stylesheet">
+  <link rel="stylesheet" href="{css}">
+</head>"""
+
+def head(title, desc, ogtitle, ogtype, css):
+    return HEAD.format(title=html.escape(title), desc=html.escape(desc, quote=True),
+                       ogtitle=html.escape(ogtitle, quote=True), ogtype=ogtype,
+                       favicon=FAVICON, fonts=FONTS, css=css)
+
+BG = """  <div class="bg" aria-hidden="true">
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-vignette"></div>
-  </div>
-  <header class="nav">
-    <nav class="nav-links" aria-label="Sections">
-      <a href="index.html#projects">Projects</a>
-      <a href="index.html#writing">Writing</a>
-      <a href="index.html#education">Education</a>
-      <a href="index.html#experience">Experience</a>
-      <a href="index.html#interests">Other Interests</a>
-    </nav>
-  </header>
-  <main id="main">
+  </div>"""
 
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
-        <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
-        <p class="hero-title">I'm passionate about turning what AI makes possible into innovative products that make a difference.</p>
-        <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com" target="_blank" rel="noopener noreferrer">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co" target="_blank" rel="noopener noreferrer">Antler</a>.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
-          <a class="btn" href="https://linkedin.com/in/noa-barzelay" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
-          <a class="btn" href="mailto:noabarzelay@gmail.com">Email</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-      <svg class="fanout" viewBox="0 0 420 300" fill="none" aria-hidden="true">
+def nav(prefix=""):
+    return f"""  <header class="nav">
+    <nav class="nav-links" aria-label="Sections">
+      <a href="{prefix}index.html#projects">Projects</a>
+      <a href="{prefix}index.html#writing">Writing</a>
+      <a href="{prefix}index.html#education">Education</a>
+      <a href="{prefix}index.html#experience">Experience</a>
+      <a href="{prefix}index.html#interests">Other Interests</a>
+    </nav>
+  </header>"""
+
+HERO_SVG = """      <svg class="fanout" viewBox="0 0 420 300" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="#6EE7F5" stop-opacity="0.1"/>
@@ -82,7 +120,28 @@
           <circle cx="300" cy="256" r="4" class="node"/>
           <circle cx="388" cy="150" r="5.5" class="node node-out"/>
         </g>
-      </svg>
+      </svg>"""
+
+def index_page():
+    body = f"""<body>
+{BG}
+{nav()}
+  <main id="main">
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="tick"></span>TECHNICAL PRODUCT MANAGER</p>
+        <h1 class="hero-name">Noa <span class="grad">Barzelay</span></h1>
+        <p class="hero-title">I'm passionate about turning what AI makes possible into innovative products that make a difference.</p>
+        <p class="hero-body">Technical PM spanning hyperscale engineering, growth ownership, and market insight. Built the ML platform at <a href="https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer">Microsoft</a>, owned a predictive-AI product through a $300M exit at <a href="https://www.wenrix.com" target="_blank" rel="noopener noreferrer">Wenrix</a>, now venture-capital investing in AI infrastructure, enterprise, and security at <a href="https://www.antler.co" target="_blank" rel="noopener noreferrer">Antler</a>.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="../../resume/Noa-Barzelay-Resume.pdf" download="Noa Barzelay - Resume.pdf">Resume <span aria-hidden="true">&darr;</span></a>
+          <a class="btn" href="https://linkedin.com/in/noa-barzelay" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">&#8599;</span></a>
+          <a class="btn" href="mailto:noabarzelay@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+{HERO_SVG}
       </div>
     </section>
 
@@ -267,4 +326,48 @@
        if that code is taken, pick another and replace it in the URL below (one place per page). -->
   <script data-goatcounter="https://noabarzelay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
+</html>"""
+    doc = (head("Noa Barzelay",
+                "Noa Barzelay builds agentic AI tooling and invests in early-stage AI infrastructure. Investor at Antler, MBA at Columbia, formerly product at Wenrix and engineering at Microsoft.",
+                "Noa Barzelay", "website", "styles.css")
+           + "\n" + body + "\n")
+    doc = doc.replace("<body>", "<!-- subhead (honest, no lab/research overclaim) options: A1 I'm passionate about turning what AI makes possible into products people trust. | A2 I love turning powerful AI into products people can trust. | A3 I love turning complex technology into products people rely on. | A4 I love building products on top of powerful AI, the kind people actually trust. -->\n<body>", 1)
+    (OUT / "index.html").write_text(doc, encoding="utf-8")
+    print("wrote index.html")
+
+def article_page(md_file, out_rel, kind, meta_extra, desc):
+    md = (CONTENT / md_file).read_text(encoding="utf-8")
+    title, body = md_to_body(md)
+    doc = head(f"{title} | Noa Barzelay", desc, title, "article", "../styles.css")
+    doc += f"""
+<body class="reading">
+{BG}
+{nav("../")}
+  <main id="main">
+    <article class="article">
+      <p class="crumb"><a href="../index.html">&larr; Noa Barzelay</a> <span class="crumb-sep">/</span> <span>{html.escape(kind)}</span></p>
+      <div class="article-eyebrow"><span class="w-kind">{html.escape(kind.upper())}</span><span class="dotsep">&middot;</span><span>{html.escape(meta_extra)}</span></div>
+      <h1 class="article-title">{html.escape(title)}</h1>
+      <p class="article-stand">{html.escape(desc)}</p>
+      <div class="article-body">
+{body}
+      </div>
+      <footer class="article-foot">
+        <a href="../index.html">&larr; Back to index</a>
+        <a href="mailto:noabarzelay@gmail.com">noabarzelay@gmail.com</a>
+      </footer>
+    </article>
+  </main>
+  <!-- GoatCounter privacy-friendly analytics (free). Register the code "noabarzelay" at https://www.goatcounter.com/ ;
+       if that code is taken, pick another and replace it in the URL below (one place per page). -->
+  <script data-goatcounter="https://noabarzelay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
 </html>
+"""
+    (OUT / out_rel).write_text(doc, encoding="utf-8")
+    print("wrote", out_rel)
+
+index_page()
+article_page("essay-inference-compute.md", "writing/inference-compute.html", "Essay", "July 2026",
+             "A walk down the compute stack as inference overtakes training: what token generation actually bottlenecks on, who is building silicon against each limit, and why the payoff grows as inference does even as it stays hardest for new entrants to capture.")
+print("done")
