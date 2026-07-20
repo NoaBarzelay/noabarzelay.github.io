@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generator for the cyber-tech variant: index + 2 essays + 2 decision pages + shared css.
+"""Generator for the cyber-tech variant: index + 1 essay + 2 decision pages + shared css.
 Personal-site backbone: the hero H1 is Noa's NAME; the tagline is the subhead."""
 import html, re, pathlib
 
@@ -180,13 +180,9 @@ def index_page():
         <span class="idx">02</span><h2 class="block-title">Writing</h2><span class="rule"></span>
       </div>
       <ul class="writing-list">
-        <li><a href="writing/layer-beneath.html">
-          <div class="w-main"><span class="w-kind">ESSAY</span><span class="w-title">The Layer Beneath the Agents</span></div>
-          <p class="w-prev">A 45-product map of the coding-agent orchestrator market, and why the durable companies get built in the neutral cross-vendor governance, cost, and audit layer beneath the agents.</p>
-        </a></li>
-        <li><a href="writing/agentic-security.html">
-          <div class="w-main"><span class="w-kind">ESSAY</span><span class="w-title">Agents Broke the Security Stack</span></div>
-          <p class="w-prev">Prompt injection is social engineering, not SQL injection, so it will never be patched away, and the durable money in agent security sits in the boring containment and identity layers.</p>
+        <li><a href="writing/inference-compute.html">
+          <div class="w-main"><span class="w-kind">ESSAY</span><span class="w-title">Inference and the Current Limits of the Compute Stack</span></div>
+          <p class="w-prev">A walk down the compute stack as inference overtakes training: what token generation actually bottlenecks on, who is building silicon against each limit, and why the payoff grows as inference does even as it stays hardest for new entrants to capture.</p>
         </a></li>
       </ul>
     </section>
@@ -375,8 +371,6 @@ def article_page(md_file, out_rel, kind, meta_extra, desc):
     print("wrote", out_rel)
 
 index_page()
-article_page("essay-layer-beneath.md", "writing/layer-beneath.html", "Essay", "April 2026",
-             "A 45-product map of the coding-agent orchestrator market, and why the durable companies get built in the neutral cross-vendor governance, cost, and audit layer beneath the agents.")
-article_page("essay-agentic-security.md", "writing/agentic-security.html", "Essay", "2026",
-             "Prompt injection is social engineering, not SQL injection, so it will never be patched away, and the durable money in agent security sits in the boring containment and identity layers, not the headline firewall category the acquirers have already bought out.")
+article_page("essay-inference-compute.md", "writing/inference-compute.html", "Essay", "July 2026",
+             "A walk down the compute stack as inference overtakes training: what token generation actually bottlenecks on, who is building silicon against each limit, and why the payoff grows as inference does even as it stays hardest for new entrants to capture.")
 print("done")
