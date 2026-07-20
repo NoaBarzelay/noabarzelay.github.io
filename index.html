@@ -98,10 +98,9 @@
             <div class="taglist"><span class="pill">TypeScript</span><span class="pill">Bun</span><span class="pill">Claude Code</span><span class="pill">Local-first</span><span class="pill">Harness</span><span class="pill">Obsidian</span></div>
           </div>
           <p>Precept is my local-first, self-improving platform on top of Claude Code that turns a stateless coding agent into one that compounds across sessions. It learns how I work from the corrections and edits I make and governs the result as a catalog of typed entries: rules that enforce, knowledge notes, skills, agent personas, conventions, and more, each compiled to where Claude Code loads it from and each approved by me before it takes effect.</p>
-          <p>It attaches through several surfaces: the pre-tool, prompt-submit, and session-end hooks, the session transcript, and a review CLI. Off the interactive turn, a reader turns each session into evidence, diffing what the agent wrote against the file's final state to catch a silent edit, and an inference pass proposes at most one durable item or abstains behind a cost filter, grounding its confidence in observable signals rather than the model's own say-so. I keep, correct, or dismiss each candidate before anything is written, and only a turn I typed can author an enforcing rule, so content read mid-session cannot plant one. The catalog is versioned markdown cards indexed in SQLite, knowledge is filed into my Obsidian vault, and the must-hold rules compile to a plain check cache the pre-tool hook evaluates in milliseconds with no model or parser on the path. Every rule is judged against the real calls it would have fired on rather than a rationale, a new one stays probationary until it proves itself, and the offline suite and architecture fitness functions run in CI on every push.</p>
+          <p>It attaches through several surfaces: the pre-tool, prompt-submit, and session-end hooks, the session transcript, and a review CLI. Off the interactive turn, a reader turns each session into evidence, catching even a silent edit by diffing what the agent wrote against the file's final state, and an inference pass proposes one durable item or abstains behind a cost filter. I keep, correct, or dismiss each candidate before anything is written, and only a turn I typed can author an enforcing rule. The catalog is versioned markdown cards indexed in SQLite with knowledge filed into my Obsidian vault, the must-hold rules compile to a check cache the pre-tool hook evaluates with no model on the path, and a deterministic harness runs the whole suite in CI on every push.</p>
           <div class="card-links">
             <a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener noreferrer">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
-            <a href="notes/precept.html">Design decisions <span aria-hidden="true">&rarr;</span></a>
           </div>
         </article>
 
@@ -112,9 +111,6 @@
           </div>
           <p>Thesis Engine is my multi-agent research engine for venture capital investment theses and deal sourcing. It takes a broad thesis idea, writes a falsifiable litmus test, decomposes the market into solution-oriented categories, and outputs a sourced report with a ranked list of potential investments.</p>
           <p>The pipeline begins with a planner that writes the litmus test, a falsifiable rule for what qualifies as a fit, and I review and edit it before any research runs. Parallel agents then research each category, an adversarial critic deduplicates companies across categories and flags thin evidence, and a scoring stage ranks what survives against my investment criteria. A deterministic eval harness runs in CI on every push.</p>
-          <div class="card-links">
-            <a href="notes/thesis-engine.html">Design decisions <span aria-hidden="true">&rarr;</span></a>
-          </div>
         </article>
 
       </div>
@@ -132,14 +128,6 @@
         <li><a href="writing/agentic-security.html">
           <div class="w-main"><span class="w-kind">ESSAY</span><span class="w-title">Agents Broke the Security Stack</span></div>
           <p class="w-prev">Prompt injection is social engineering, not SQL injection, so it will never be patched away, and the durable money in agent security sits in the boring containment and identity layers.</p>
-        </a></li>
-        <li><a href="notes/precept.html">
-          <div class="w-main"><span class="w-kind">NOTES</span><span class="w-title">Precept: design decisions</span></div>
-          <p class="w-prev">Why I only claim enforcement for the deterministic subset, the eval that keeps that claim honest, and four decisions where I rejected the default.</p>
-        </a></li>
-        <li><a href="notes/thesis-engine.html">
-          <div class="w-main"><span class="w-kind">NOTES</span><span class="w-title">Thesis Engine: five decisions and what they replaced</span></div>
-          <p class="w-prev">Owning the orchestration loop, sealing bring-your-own keys, failing loud but finishing, fixing the output schema, and gating merges on evals.</p>
         </a></li>
       </ul>
     </section>
