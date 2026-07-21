@@ -197,8 +197,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
 .foot-row a:hover { color: var(--cyan); }
 
 /* ---------- reading pages ---------- */
-body.reading .article { max-width: 720px; margin: 0 auto; padding: 40px 0 40px; }
-.reading main { max-width: 720px; }
+body.reading .article { max-width: 880px; margin: 0 auto; padding: 40px 0 40px; }
+.reading main { max-width: 880px; }
 .crumb { font-family: var(--font-mono); font-size: 13px; color: var(--text-2); margin-bottom: 34px; }
 .crumb a { color: var(--text-2); transition: color .18s; }
 .crumb a:hover { color: var(--cyan); }
