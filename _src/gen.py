@@ -158,6 +158,9 @@ def index_page():
           </div>
           <p>Precept is my local-first, self-improving platform on top of Claude Code that turns a stateless coding agent into one that compounds across sessions. It learns how I work from the corrections and edits I make and governs the result as a catalog of typed entries: rules that enforce, knowledge notes, skills, agent personas, conventions, and more, each compiled to where Claude Code loads it from and each approved by me before it takes effect.</p>
           <p>It attaches through several surfaces: the pre-tool, prompt-submit, and session-end hooks, the session transcript, and a review CLI. Off the interactive turn, a reader turns each session into evidence, catching even a silent edit by diffing what the agent wrote against the file's final state, and an inference pass proposes one durable item or abstains behind a cost filter. I keep, correct, or dismiss each candidate before anything is written, and only a turn I typed can author an enforcing rule. The catalog is versioned markdown cards indexed in SQLite with knowledge filed into my Obsidian vault, the must-hold rules compile to a check cache the pre-tool hook evaluates with no model on the path, and a deterministic harness runs the whole suite in CI on every push.</p>
+          <div class="card-links">
+            <a href="https://github.com/NoaBarzelay/precept" target="_blank" rel="noopener noreferrer">GitHub <span class="ext" aria-hidden="true">&#8599;</span></a>
+          </div>
         </article>
 
         <article class="card">
